@@ -9,6 +9,7 @@ export default defineConfig({
       '/api': {
         target: 'https://health-coach-fe.vercel.app',
         changeOrigin: true,
+        secure: true,
       },
     },
   },

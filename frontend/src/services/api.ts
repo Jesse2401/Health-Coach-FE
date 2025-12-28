@@ -1,4 +1,15 @@
-const API_BASE = '/api/chat';
+// Use environment variable for production, fallback to proxy path for development
+// If VITE_API_BASE_URL is set, append /api/chat to it; otherwise use proxy path
+const getApiBase = () => {
+  const envUrl = import.meta.env.VITE_API_BASE_URL;
+  if (envUrl) {
+    // Remove trailing slash if present, then append /api/chat
+    return `${envUrl.replace(/\/$/, '')}/api/chat`;
+  }
+  return '/api/chat';
+};
+
+const API_BASE = getApiBase();
 
 export interface Message {
   id: string;
