@@ -1,0 +1,58 @@
+:root {
+  /* WhatsApp-inspired dark theme with health-focused accent */
+  --bg-primary: #0b141a;
+  --bg-secondary: #111b21;
+  --bg-chat: #0b141a;
+  --bg-user-bubble: #005c4b;
+  --bg-assistant-bubble: #202c33;
+  --text-primary: #e9edef;
+  --text-secondary: #8696a0;
+  --text-timestamp: rgba(255, 255, 255, 0.6);
+  --border-color: #222d34;
+  --accent: #00a884;
+  --accent-hover: #00c49a;
+  --input-bg: #2a3942;
+  --header-bg: #202c33;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+#root {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #0b141a 0%, #1a2e38 100%);
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--text-secondary);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-primary);
+}
+
