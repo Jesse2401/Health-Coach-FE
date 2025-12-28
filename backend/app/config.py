@@ -1,11 +1,22 @@
 from pydantic_settings import BaseSettings
-from functools import lru_cache
 from typing import Literal
+from pydantic import field_validator
 
 
 class Settings(BaseSettings):
     # Database
-    DATABASE_URL: str = "postgresql+asyncpg://postgres:postgres@localhost:5432/health_coach"
+    DATABASE_URL: str = "postgresql+asyncpg://neondb_owner:npg_8WrZJcFvM3iu@ep-misty-night-ae4x4o1k-pooler.c-2.us-east-2.aws.neon.tech/neondb?sslmode=require"
+    
+    @field_validator("DATABASE_URL")
+    @classmethod
+    def ensure_asyncpg_driver(cls, v: str) -> str:
+        """Ensure DATABASE_URL uses asyncpg driver for async operations."""
+        if isinstance(v, str):
+            if v.startswith("postgresql://") and "+asyncpg" not in v:
+                v = v.replace("postgresql://", "postgresql+asyncpg://", 1)
+            elif v.startswith("postgres://") and "+asyncpg" not in v:
+                v = v.replace("postgres://", "postgresql+asyncpg://", 1)
+        return v
     
     # Redis
     REDIS_URL: str = "redis://localhost:6379/0"
@@ -30,7 +41,6 @@ class Settings(BaseSettings):
         extra = "ignore"
 
 
-@lru_cache()
 def get_settings() -> Settings:
     return Settings()
 
