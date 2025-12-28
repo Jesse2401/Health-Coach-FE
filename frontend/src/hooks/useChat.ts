@@ -20,7 +20,6 @@ export function useChat(): UseChatReturn {
   const [isTyping, setIsTyping] = useState(false);
   const [hasMore, setHasMore] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [initialized, setInitialized] = useState(false);
   
   const cursorRef = useRef<string | null>(null);
   const loadingRef = useRef(false);
@@ -29,8 +28,7 @@ export function useChat(): UseChatReturn {
   useEffect(() => {
     const init = async () => {
       try {
-        const response = await chatApi.init();
-        setInitialized(true);
+        await chatApi.init();
         
         // Load initial messages
         await loadMoreMessages();
